@@ -55,6 +55,7 @@ function setOperator() {
     }
     operator = this.textContent;
     numBtns.forEach(btn => btn.addEventListener('click', numBtnClicked));
+    backSpaceBtn.addEventListener('click', backSpace);
     fromNumInput = false
 }
 
@@ -84,6 +85,7 @@ function operate() {
     temp = operand2;
     operand2 = null;
     numBtns.forEach(btn => btn.removeEventListener('click', numBtnClicked));
+    backSpaceBtn.removeEventListener('click', backSpace);
     fromNumInput = false;
 }
 
@@ -95,9 +97,10 @@ function numBtnClicked() {
         opBtnClicked = false;
     }
     if (display.textContent.length < 15) {
-        let updated = display.textContent + this.textContent;
-        if(updated !== '00') {
-            display.textContent = updated;
+        if(this.textContent !== '0') {
+            display.textContent = display.textContent === '0' ? '' + this.textContent : display.textContent + this.textContent;
+        } else {
+            display.textContent += display.textContent === '0' ? '' : this.textContent;
         }
         
         
@@ -106,6 +109,7 @@ function numBtnClicked() {
 
 function clearDisplay() {
     numBtns.forEach(btn => btn.addEventListener('click', numBtnClicked));
+    backSpaceBtn.addEventListener('click', backSpace);
     operand1 = null;
     operand2 = null;
     operator = null;
