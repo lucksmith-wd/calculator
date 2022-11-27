@@ -88,6 +88,10 @@ button {
     background-color: hsl(352, 52%, 68%);
 }
 
+.equals:active {
+    background-color: hsl(352, 52%, 68%, 60%);
+}
+
 /* .footer {
     color: darkgrey;
     text-align: center;

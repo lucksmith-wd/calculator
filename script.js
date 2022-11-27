@@ -7,6 +7,7 @@ display.textContent = '0';
 
 const numBtns = [...document.querySelectorAll('.num')];
 numBtns.forEach(btn => btn.addEventListener('click', numBtnClicked));
+const dotBtn = numBtns.find(btn => btn.textContent ==='.');
 
 const opBtns = [...document.querySelectorAll('.op')];
 opBtns.forEach(btn => btn.addEventListener('click', setOperator))
@@ -18,7 +19,6 @@ const clearBtn = document.querySelector('.clear');
 clearBtn.addEventListener('click', clearDisplay);
 
 const backSpaceBtn = document.querySelector('.back');
-console.log(backSpaceBtn);
 backSpaceBtn.addEventListener('click', backSpace);
 
 let opBtnClicked = true; // If true, userinput will start a new number. 
@@ -39,6 +39,7 @@ function backSpace() {
     } else {
         opBtnClicked = true;
     }
+    dotBtn.addEventListener('click', numBtnClicked);
 
 }
 
@@ -97,6 +98,9 @@ function numBtnClicked() {
         opBtnClicked = false;
     }
     if (display.textContent.length < 15) {
+        if(this.textContent.includes('.')) {
+            dotBtn.removeEventListener('click', numBtnClicked);
+        }
         if(this.textContent !== '0') {
             display.textContent = display.textContent === '0' ? '' + this.textContent : display.textContent + this.textContent;
         } else {
